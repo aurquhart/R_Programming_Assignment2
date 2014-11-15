@@ -22,14 +22,7 @@ complete <- function(directory, id = 1:332) {
   
   dat <- dat[complete.cases(dat),] #Remove NA rows
   answer <- aggregate(sulfate ~ ID, dat,length) #Count and group by ID
-  names(answer)[names(answer)=="sulfate"] <- "nobs"
-  return(answer)
+  names(answer)[names(answer)=="sulfate"] <- "nobs" #Sort header name
+  
+  return(answer[match(id, answer$ID),]) #Sort to original order and return
 }
-
-#complete("specdata", 3)
-#complete("specdata", c(2, 4, 8, 10, 12))
-
-
-#complete("specdata", 1)
-
-#?aggregate

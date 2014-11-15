@@ -23,8 +23,12 @@ corr <- function(directory, threshold = 0) {
   answer_set <- merge(dat_non_na,dat_non_na_group,by.x = "ID", by.y = "ID") #now join them back on
   
   for_correl <- answer_set[answer_set$sulfate.y>threshold,] #now filter based on threshold
-  result <- by(for_correl[,3:4], for_correl$sulfate.y, function(x) {cor(x$sulfate.x, x$nitrate)}) #do correlations
+  result <- by(for_correl[,3:4], for_correl$ID, function(x) {cor(x$sulfate.x, x$nitrate)}) #do correlations
   result.dataframe <- as.data.frame(as.matrix(result)) #convery to df
   result.dataframe[,1] #return vector of numbers
   
 }
+
+
+#cr <- corr("specdata", 150)
+#head(cr)
